@@ -1,0 +1,21 @@
+{
+    "name": "rental-ms",
+    "version": "1.0.0",
+    "description": "system for renting houses",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Agabaderrickjunior/Rental-ms.git"
+    },
+    "author": "Dan & dJUNIOR",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Agabaderrickjunior/Rental-ms/issues"
+    },
+    "homepage": "https://github.com/Agabaderrickjunior/Rental-ms#readme",
+    "dependencies": {}
+}
