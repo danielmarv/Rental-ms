@@ -1,8 +1,8 @@
 const pool = require('../database');
 
-const Customer = {
-    getAllCustomers: (callback) => {
-        pool.query('SELECT * FROM customers', (error, results, fields) => {
+const Rental = {
+    getAllRentals: (callback) => {
+        pool.query('SELECT * FROM rentals', (error, results, fields) => {
             if (error) {
                 return callback(error);
             }
@@ -11,8 +11,8 @@ const Customer = {
         });
     },
 
-    getCustomerById: (id, callback) => {
-        pool.query('SELECT * FROM customers WHERE id = ?', [id], (error, results, fields) => {
+    getRentalById: (id, callback) => {
+        pool.query('SELECT * FROM rentals WHERE id = ?', [id], (error, results, fields) => {
             if (error) {
                 return callback(error);
             }
@@ -21,8 +21,8 @@ const Customer = {
         });
     },
 
-    addCustomer: (data, callback) => {
-        pool.query('INSERT INTO customers SET ?', data, (error, results, fields) => {
+    addRental: (data, callback) => {
+        pool.query('INSERT INTO rentals SET ?', data, (error, results, fields) => {
             if (error) {
                 return callback(error);
             }
@@ -31,8 +31,8 @@ const Customer = {
         });
     },
 
-    updateCustomer: (id, data, callback) => {
-        pool.query('UPDATE customers SET ? WHERE id = ?', [data, id], (error, results, fields) => {
+    updateRental: (id, data, callback) => {
+        pool.query('UPDATE rentals SET ? WHERE id = ?', [data, id], (error, results, fields) => {
             if (error) {
                 return callback(error);
             }
@@ -41,15 +41,15 @@ const Customer = {
         });
     },
 
-    deleteCustomer: (id, callback) => {
-        pool.query('DELETE FROM customers WHERE id = ?', [id], (error, results, fields) => {
+    deleteRental: (id, callback) => {
+        pool.query('DELETE FROM rentals WHERE id = ?', [id], (error, results, fields) => {
             if (error) {
                 return callback(error);
             }
 
             return callback(null, results);
         });
-    }
+    },
 };
 
-module.exports = Customer;
+module.exports = Rental;
