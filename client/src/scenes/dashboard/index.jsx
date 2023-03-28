@@ -18,44 +18,44 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import BreakdownChart from "components/BreakdownChart";
 import OverviewChart from "components/OverviewChart";
-// import { useGetDashboardQuery } from "state/api";
+import { useGetDashboardQuery } from "state/api";
 import StatBox from "components/StatBox";
 
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
-  // const { data, isLoading } = useGetDashboardQuery();
+  const { data, isLoading } = useGetDashboardQuery();
 
-  // const columns = [
-  //   {
-  //     field: "_id",
-  //     headerName: "ID",
-  //     flex: 1,
-  //   },
-  //   {
-  //     field: "userId",
-  //     headerName: "User ID",
-  //     flex: 1,
-  //   },
-  //   {
-  //     field: "createdAt",
-  //     headerName: "CreatedAt",
-  //     flex: 1,
-  //   },
-  //   {
-  //     field: "products",
-  //     headerName: "# of Products",
-  //     flex: 0.5,
-  //     sortable: false,
-  //     renderCell: (params) => params.value.length,
-  //   },
-  //   {
-  //     field: "cost",
-  //     headerName: "Cost",
-  //     flex: 1,
-  //     renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
-  //   },
-  // ];
+  const columns = [
+    {
+      field: "_id",
+      headerName: "ID",
+      flex: 1,
+    },
+    {
+      field: "userId",
+      headerName: "User ID",
+      flex: 1,
+    },
+    {
+      field: "createdAt",
+      headerName: "CreatedAt",
+      flex: 1,
+    },
+    {
+      field: "products",
+      headerName: "# of Products",
+      flex: 0.5,
+      sortable: false,
+      renderCell: (params) => params.value.length,
+    },
+    {
+      field: "cost",
+      headerName: "Cost",
+      flex: 1,
+      renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
+    },
+  ];
 
   return (
     <Box m="1.5rem 2.5rem">
@@ -89,7 +89,7 @@ const Dashboard = () => {
         }}
       >
         {/* ROW 1 */}
-        {/* <StatBox
+        <StatBox
           title="Total Customers"
           value={data && data.totalCustomers}
           increase="+14%"
@@ -110,8 +110,8 @@ const Dashboard = () => {
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
             />
           }
-        /> */}
-        {/* <Box
+        /> 
+        <Box
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
@@ -119,8 +119,8 @@ const Dashboard = () => {
           borderRadius="0.55rem"
         >
           <OverviewChart view="sales" isDashboard={true} />
-        </Box> */}
-        {/* <StatBox
+        </Box>
+        <StatBox
           title="Monthly Sales"
           value={data && data.thisMonthStats.totalSales}
           increase="+5%"
@@ -141,10 +141,10 @@ const Dashboard = () => {
               sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
             />
           }
-        /> */}
+        />
 
         {/* ROW 2 */}
-        {/* <Box
+        <Box
           gridColumn="span 8"
           gridRow="span 3"
           sx={{
@@ -179,8 +179,8 @@ const Dashboard = () => {
             rows={(data && data.transactions) || []}
             columns={columns}
           />
-        </Box> */}
-        {/* <Box
+        </Box>
+        <Box
           gridColumn="span 4"
           gridRow="span 3"
           backgroundColor={theme.palette.background.alt}
@@ -199,7 +199,7 @@ const Dashboard = () => {
             Breakdown of real states and information via category for revenue
             made for this year and total sales.
           </Typography>
-        </Box> */}
+        </Box>
       </Box>
     </Box>
   );

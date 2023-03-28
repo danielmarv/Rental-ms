@@ -1,8 +1,8 @@
 import {
   GridColumnMenuContainer,
-  GridFilterMenuItem,
-  HideGridColMenuItem,
+  GridColumnMenuHideItem,
 } from "@mui/x-data-grid";
+import { Autocomplete } from '@mui/material';
 
 const CustomColumnMenu = (props) => {
   const { hideMenu, currentColumn, open } = props;
@@ -12,8 +12,8 @@ const CustomColumnMenu = (props) => {
       currentColumn={currentColumn}
       open={open}
     >
-      <GridFilterMenuItem onClick={hideMenu} column={currentColumn} />
-      <HideGridColMenuItem onClick={hideMenu} column={currentColumn} />
+      <Autocomplete onClick={hideMenu} column={currentColumn} />
+      <GridColumnMenuHideItem onClick={hideMenu} column={currentColumn} />
     </GridColumnMenuContainer>
   );
 };
