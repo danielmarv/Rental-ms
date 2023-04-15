@@ -1,35 +1,95 @@
 import React, { useState } from 'react';
+import { FormControl, InputLabel, Box} from "@mui/material";
 import axios from 'axios';
 
-const MessageForm = () => {
+function Message() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [message, setMessage] = useState('');
+  const [notification, setNotification] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const payload = { phoneNumber, message };
+  const sendMessage = async () => {
+    setIsLoading(true);
     try {
-      const response = await axios.post('https://your-api-url.com/send-message', payload);
-      console.log(response.data);
+      const response = await axios.post('https://api.example.com/send-message', {
+        phoneNumber,
+        message,
+      });
+      setNotification(response.data.success);
+      setIsLoading(false);
     } catch (error) {
-      console.error(error);
+      setNotification(error.response.data.error);
+      setIsLoading(false);
+    }
+  };
+
+  const sendNotification = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post('https://api.example.com/send-notification', {
+        message: notification,
+      });
+      setNotification(response.data.success);
+      setIsLoading(false);
+    } catch (error) {
+      setNotification(error.response.data.error);
+      setIsLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Phone Number:
-        <input type="tel" value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} />
-      </label>
-      <label>
-        Message:
-        <textarea value={message} onChange={(event) => setMessage(event.target.value)} />
-      </label>
-      <button type="submit">Send Message</button>
-    </form>
-  );
-};
+    <Box m="1.5rem 2.5rem">
+      <h1>Send Message</h1>
+      <FormControl sx={{ mt: "2rem" }}>
+        <label htmlFor="phone-number">Phone Number:</label>
+        <input
+          sx={{ mt: "2rem" }}
+          type="text"
+          id="phone-number"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
 
-export default MessageForm;
+        <label htmlFor="message">Message:</label>
+        <textarea
+          id="message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+
+        <button type="button" onClick={sendMessage} disabled={isLoading}>
+          {isLoading ? 'Sending...' : 'Send Message'}
+        </button>
+
+        {notification && (
+          <div className="notification">
+            <p>{notification}</p>
+          </div>
+        )}
+      </FormControl>
+
+      <h1>Send Notification</h1>
+      <FormControl sx={{ mt: "1rem" }}>
+        <label htmlFor="notification">Notification:</label>
+        <input
+          type="text"
+          id="notification"
+          value={notification}
+          onChange={(e) => setNotification(e.target.value)}
+        />
+
+        <button type="button" onClick={sendNotification} disabled={isLoading}>
+          {isLoading ? 'Sending...' : 'Send Notification'}
+        </button>
+
+        {notification && (
+          <div className="notification">
+            <p>{notification}</p>
+          </div>
+        )}
+      </FormControl>
+    </Box>
+  );
+}
+
+export default Message;
