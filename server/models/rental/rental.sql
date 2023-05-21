@@ -1,0 +1,32 @@
+CREATE DATABASE rental_app;
+
+USE rental_app;
+
+CREATE TABLE customers (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  phone VARCHAR(20),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE rentals (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  customer_id INT(11) NOT NULL,
+  rental_date DATE NOT NULL,
+  return_date DATE,
+  amount DECIMAL(10, 2) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
+);
+
+CREATE TABLE users (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
